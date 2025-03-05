@@ -1,37 +1,30 @@
 package models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "aereolineas")
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "aerolineas")
+
 public class Aereolinea {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String nombre;
 
-    @ManyToMany
-    @JoinTable(
-            name = "vuelos_de_aereolineas",
-            joinColumns = @JoinColumn(name = "aereolinea_id", nullable = false, referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "vuelo_id", nullable = true, referencedColumnName = "id")
-    )
-    private List<Vuelo> vuelos = new ArrayList<Vuelo>();
+    @ManyToMany(targetEntity = Vuelo.class)
+    @JoinTable(name = "aerolineas_vuelos",
+            inverseJoinColumns = @JoinColumn(nullable = true))
 
-    public void agregarVuelo(Vuelo vuelo) {
-        this.vuelos.add(vuelo);
-    }
-
+    private List<Vuelo> vuelos;
 }

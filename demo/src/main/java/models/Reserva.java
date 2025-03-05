@@ -1,31 +1,32 @@
 package models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "reservas")
+
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    private UUID codigoReserva;
+    @Column(unique = true, nullable = false)
+    private UUID codigoDeReserva;
 
-    @ManyToOne
-    @JoinColumn(name = "pasajero_id", nullable = true)
+    @ManyToOne(targetEntity = Pasajero.class, optional = true)
+    @JoinColumn(nullable = true, name = "pasajero_id")
     private Pasajero pasajero;
 
-    @ManyToOne
-    @JoinColumn(name = "vuelo_id", nullable = false)
+    @ManyToOne(targetEntity = Vuelo.class, optional = false)
+    @JoinColumn(nullable = false, name = "vuelo_id")
     private Vuelo vuelo;
+
 }

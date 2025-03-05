@@ -1,26 +1,21 @@
 package models;
 
-
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "pasaportes")
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "pasaportes")
+
 public class Pasaporte {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
-    private String number;
-
-    @OneToOne(mappedBy = "pasaporte")
-    private Pasajero pasajero;
-
+    private String numero;
 }

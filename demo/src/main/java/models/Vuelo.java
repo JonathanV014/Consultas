@@ -1,37 +1,35 @@
 package models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Setter
-@Getter
-@Table(name = "vuelos")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Data
+@Table(name = "vuelos")
+
 public class Vuelo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
-    private UUID uuid;
+    @Column(unique = true, nullable = false)
+    private UUID numeroVuelo;
 
-    @Column
-    private String origin;
+    @Column(nullable = false)
+    private String origen;
 
-    @Column
-    private String destiny;
+    @Column(nullable = false)
+    private String destino;
 
-    @OneToMany
-    @JoinColumn(name = "reserva_id", nullable = false)
-    private Set<Reserva> reservas;
+    @OneToMany(targetEntity = Reserva.class, mappedBy = "vuelo")
+    private List<Reserva> reservas;
 
-    @ManyToMany(mappedBy = "vuelos")
-    private Set<Aereolinea> aereolineas;
 }

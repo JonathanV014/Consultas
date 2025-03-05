@@ -1,28 +1,35 @@
 package models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "pasajeros")
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Data
+@Table(name = "pasajeros")
+
 public class Pasajero {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "pasaporte_id", referencedColumnName = "id")
+    @Column(nullable = false)
+    private String nombre;
+
+    @Column(nullable = false)
+    private String NID;
+
+    @OneToOne(targetEntity = Pasaporte.class, fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(nullable = false, name = "pasaporte_id")
     private Pasaporte pasaporte;
 
-    @OneToMany
-    @JoinColumn(name = "reserva_id")
-    private Set<Reserva> reserva;
+    @OneToMany(targetEntity = Reserva.class, mappedBy = "pasajero")
+    private List<Reserva> reservas =  new ArrayList<>();
+
 }
