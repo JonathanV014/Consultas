@@ -1,4 +1,4 @@
-package interfaces;
+package repositories;
 
 import models.Pasaporte;
 import models.Reserva;
@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.UUID;
 
-public interface InterfaceReserva extends JpaRepository<Pasaporte, Long> {
+public interface RepositoryReserva extends JpaRepository<Pasaporte, Long> {
     List<Reserva> findByPasajero_Id(Long pasajeroId);
 
     List<Reserva> findByVuelo_Id(Long vueloId);

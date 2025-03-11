@@ -1,4 +1,4 @@
-package interfaces;
+package repositories;
 
 import models.Pasajero;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface InterfacePasajero extends JpaRepository<Pasajero, Long> {
+public interface RepositoryPasajero extends JpaRepository<Pasajero, Long> {
     Pasajero findByIdPasajero(Long idPasajero);
 
     List<Pasajero> findByNombre(String nombre);

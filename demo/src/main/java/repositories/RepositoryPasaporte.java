@@ -1,4 +1,4 @@
-package interfaces;
+package repositories;
 
 import models.Pasaporte;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface InterfacePasaporte extends JpaRepository<Pasaporte, Long> {
+public interface RepositoryPasaporte extends JpaRepository<Pasaporte, Long> {
     Pasaporte findByNumber(String number);
 
     Pasaporte findByNumberIgnoreCase(String number);
