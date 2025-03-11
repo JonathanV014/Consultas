@@ -1,4 +1,4 @@
-package models;
+package com.example.demo.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "pasaportes")
-
 public class Pasaporte {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,4 +17,7 @@ public class Pasaporte {
 
     @Column(nullable = false)
     private String numero;
+
+    @OneToOne(mappedBy = "pasaporte", fetch = FetchType.LAZY, optional = false)
+    private Pasajero pasajero; // Relación bidireccional con Pasajero
 }
