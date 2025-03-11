@@ -1,4 +1,4 @@
-package models;
+package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,4 +18,7 @@ public class Pasaporte {
 
     @Column(nullable = false)
     private String numero;
+
+    @OneToOne(mappedBy = "pasaporte")
+    private Pasajero pasajero;
 }

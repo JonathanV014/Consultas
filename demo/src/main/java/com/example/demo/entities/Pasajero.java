@@ -1,4 +1,4 @@
-package models;
+package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class Pasajero {
     @JoinColumn(nullable = false, name = "pasaporte_id")
     private Pasaporte pasaporte;
 
-    @OneToMany(targetEntity = Reserva.class, mappedBy = "pasajero")
-    private List<Reserva> reservas =  new ArrayList<>();
+    @OneToMany(mappedBy = "pasajero", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas = new ArrayList<>();
 
 }

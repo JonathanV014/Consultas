@@ -1,11 +1,10 @@
-package models;
+package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,9 +21,11 @@ public class Aereolinea {
     @Column(nullable = false)
     private String nombre;
 
-    @ManyToMany(targetEntity = Vuelo.class)
-    @JoinTable(name = "aerolineas_vuelos",
-            inverseJoinColumns = @JoinColumn(nullable = true))
-
+    @ManyToMany
+    @JoinTable(
+            name = "aerolineas_vuelos",
+            joinColumns = @JoinColumn(name = "aerolinea_id"),
+            inverseJoinColumns = @JoinColumn(name = "vuelo_id")
+    )
     private List<Vuelo> vuelos;
 }

@@ -1,4 +1,4 @@
-package models;
+package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,8 +21,8 @@ public class Reserva {
     @Column(unique = true, nullable = false)
     private UUID codigoDeReserva;
 
-    @ManyToOne(targetEntity = Pasajero.class, optional = true)
-    @JoinColumn(nullable = true, name = "pasajero_id")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "pasajero_id", referencedColumnName = "id")
     private Pasajero pasajero;
 
     @ManyToOne(targetEntity = Vuelo.class, optional = false)

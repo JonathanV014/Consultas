@@ -1,20 +1,22 @@
-package repositories;
+package com.example.demo.repositories;
 
-import models.Pasaporte;
-import models.Reserva;
+import com.example.demo.entities.Pasaporte;
+import com.example.demo.entities.Reserva;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
 
-public interface RepositoryReserva extends JpaRepository<Pasaporte, Long> {
+@Repository
+public interface RepositoryReserva extends JpaRepository<Reserva, Long> {
     List<Reserva> findByPasajero_Id(Long pasajeroId);
 
     List<Reserva> findByVuelo_Id(Long vueloId);
 
-    Reserva findByCodigoReserva(UUID codigoReserva);
+    Reserva findByCodigoDeReserva(UUID codigoDeReserva);
 
     List<Reserva> findByPasajeroIsNull();
 
@@ -26,8 +28,8 @@ public interface RepositoryReserva extends JpaRepository<Pasaporte, Long> {
     @Query("SELECT r FROM Reserva r WHERE r.vuelo.id = :vueloId")
     List<Reserva> buscarReservasPorVuelo(@Param("vueloId") Long vueloId);
 
-    @Query("SELECT r FROM Reserva r WHERE r.codigoReserva = :codigoReserva")
-    Reserva buscarPorCodigoReserva(@Param("codigoReserva") UUID codigoReserva);
+    @Query("SELECT r FROM Reserva r WHERE r.codigoDeReserva = :codigoDeReserva")
+    Reserva buscarPorCodigoReserva(@Param("codigoDeReserva") UUID codigoDeReserva);
 
     @Query("SELECT r FROM Reserva r WHERE r.pasajero IS NULL")
     List<Reserva> buscarReservasSinPasajero();
