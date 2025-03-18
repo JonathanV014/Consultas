@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.entities.Vuelo;
 import com.example.demo.repositories.RepositoryVuelo;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -28,18 +29,17 @@ class VueloServiceTest {
     @Test
     void createVuelo() {
         Vuelo vuelo = new Vuelo(null, UUID.randomUUID(), "Islas", "Bogota", null);
-        when(repositoryVuelo.save(any(Vuelo.class))).thenReturn(new Vuelo());
+        Vuelo savedVuelo = new Vuelo(1L, vuelo.getNumeroVuelo(), vuelo.getOrigen(), vuelo.getDestino(), vuelo.getReservas());
+
+        when(repositoryVuelo.save(any(Vuelo.class))).thenReturn(savedVuelo);
 
         Vuelo createdVuelo = vueloService.createVuelo(vuelo);
 
         assertNotNull(createdVuelo.getId());
-        assertEquals("Islas",createdVuelo.getOrigen());
-        assertEquals("Bogota",createdVuelo.getDestino());
+        assertEquals("Islas", createdVuelo.getOrigen());
+        assertEquals("Bogota", createdVuelo.getDestino());
         verify(repositoryVuelo, times(1)).save(any(Vuelo.class));
-
-
     }
-
 
     @Test
     void getVueloById() {

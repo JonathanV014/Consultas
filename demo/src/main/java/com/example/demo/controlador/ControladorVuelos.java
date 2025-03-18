@@ -12,9 +12,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/vuelos")
 public class ControladorVuelos {
-    @Autowired
+
     private final VueloService vueloService;
 
+    @Autowired
     public ControladorVuelos(VueloService vueloService) {
         this.vueloService = vueloService;
     }
