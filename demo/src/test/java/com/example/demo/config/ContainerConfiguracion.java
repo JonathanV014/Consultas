@@ -13,8 +13,8 @@ public class ContainerConfiguracion {
     @ServiceConnection
     PostgreSQLContainer<?> containerPostgreSQL() {
         return new PostgreSQLContainer<>("postgres:latest")
-                .withDatabaseName("prueba")
+                .withDatabaseName("postgres")
                 .withUsername("postgres")
-                .withPassword("jonjun10");
+                .withPassword("0914");
     }
 }
